@@ -7,11 +7,13 @@
 # raspberry-pi-debian:buster-build
 FROM balenalib/%%BALENA_MACHINE_NAME%%:build
 
-RUN install_packages git wiringpi
+RUN install_packages wiringpi
 
 RUN git clone https://github.com/grimpirate/e-Paper
 
 WORKDIR e-Paper
+
+RUN mkdir bin
 
 RUN make clean && make
 
