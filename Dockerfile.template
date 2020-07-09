@@ -1,0 +1,18 @@
+# https://www.balena.io/docs/learn/welcome/primer/
+# https://www.balena.io/docs/learn/deploy/deployment/
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+# https://docs.docker.com/engine/reference/builder/
+# https://www.balena.io/docs/reference/base-images/base-images/
+# https://www.balena.io/docs/learn/develop/dockerfile/
+# raspberry-pi-debian:buster-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%:build
+
+RUN install_packages git wiringpi
+
+RUN git clone https://github.com/grimpirate/e-Paper
+
+WORKDIR e-Paper
+
+RUN make clean && make
+
+ENTRYPOINT /usr/bin/tvservice -o && sleep infinity
