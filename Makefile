@@ -16,8 +16,6 @@ USELIB_RPI = USE_WIRINGPI_LIB
 LIB_RPI = -lwiringPi -lm 
 DEBUG_RPI = -D $(USELIB_RPI) -D RPI
 
-.PHONY : RPI clean
-
 RPI:RPI_DEV RPI_epd 
 
 TARGET = epd
@@ -45,8 +43,3 @@ RPI_DEV:
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/RPI_sysfs_gpio.c -o $(DIR_BIN)/RPI_sysfs_gpio.o $(LIB_RPI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
-	
-clean :
-	rm $(DIR_BIN)/*.* 
-	rm $(TARGET) 
-
