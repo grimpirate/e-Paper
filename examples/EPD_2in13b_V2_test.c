@@ -60,14 +60,14 @@ int EPD_2in13b_V2_test(void)
     // show bmp
     printf("show red bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
-        for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {
+    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y+=2) {
+        for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X+=2 ) {
             Paint_SetPixel(X, Y, BLACK);
         }
     }
     Paint_SelectImage(RYImage);
-    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
-        for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {
+    for (UWORD Y = 1; Y < EPD_2IN13B_V2_HEIGHT; Y+=2) {
+        for (UWORD X = 1; X < EPD_2IN13B_V2_WIDTH; X+=2 ) {
             Paint_SetPixel(X, Y, BLACK);
         }
     }
