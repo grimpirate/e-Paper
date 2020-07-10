@@ -4,8 +4,8 @@
 # https://docs.docker.com/engine/reference/builder/
 # https://www.balena.io/docs/reference/base-images/base-images/
 # https://www.balena.io/docs/learn/develop/dockerfile/
-# raspberry-pi-debian:buster-build
-FROM balenalib/%%BALENA_MACHINE_NAME%%:build
+# raspberry-pi-debian-openjdk:latest-buster-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%-openjdk:latest-build
 
 RUN install_packages wiringpi
 
