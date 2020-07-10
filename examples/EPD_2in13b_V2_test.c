@@ -54,15 +54,23 @@ int EPD_2in13b_V2_test(void)
         return -1;
     }
     printf("NewImage:BlackImage and RYImage\r\n");
-    Paint_NewImage(BlackImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, 270, WHITE);
-    Paint_NewImage(RYImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, 270, WHITE);
+    Paint_NewImage(BlackImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, WHITE);
+    Paint_NewImage(RYImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, WHITE);
 
     // show bmp
     printf("show red bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in13bc-b.bmp", 0, 0);
+    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
+        for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {
+            Paint_SetPixel(X, Y, BLACK);
+        }
+    }
     Paint_SelectImage(RYImage);
-    GUI_ReadBmp("./pic/2in13bc-ry.bmp", 0, 0);
+    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
+        for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {
+            Paint_SetPixel(X, Y, BLACK);
+        }
+    }
     EPD_2IN13B_V2_Display(BlackImage, RYImage);
     // DEV_Delay_ms(2000);
 

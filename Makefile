@@ -1,11 +1,10 @@
 DIR_Config   = ./lib/Config
 DIR_EPD      = ./lib/e-Paper
-DIR_FONTS    = ./lib/Fonts
 DIR_GUI      = ./lib/GUI
 DIR_Examples = ./examples
 DIR_BIN      = ./bin
 
-OBJ_C = $(wildcard ${DIR_EPD}/*.c ${DIR_GUI}/*.c ${DIR_Examples}/*.c ${DIR_FONTS}/*.c )
+OBJ_C = $(wildcard ${DIR_EPD}/*.c ${DIR_GUI}/*.c ${DIR_Examples}/*.c )
 OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
 RPI_DEV_C = $(wildcard $(DIR_BIN)/DEV_Config.o )
 
@@ -16,7 +15,7 @@ USELIB_RPI = USE_WIRINGPI_LIB
 LIB_RPI = -lwiringPi -lm 
 DEBUG_RPI = -D $(USELIB_RPI) -D RPI
 
-RPI:RPI_DEV RPI_epd 
+RPI:RPI_epd 
 
 TARGET = epd
 CC = gcc
@@ -33,11 +32,5 @@ ${DIR_BIN}/%.o:$(DIR_Examples)/%.c
 ${DIR_BIN}/%.o:$(DIR_EPD)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
     
-${DIR_BIN}/%.o:$(DIR_FONTS)/%.c 
-	$(CC) $(CFLAGS) -c  $< -o $@ $(DEBUG)
-    
 ${DIR_BIN}/%.o:$(DIR_GUI)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
-
-RPI_DEV:
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
