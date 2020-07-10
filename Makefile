@@ -15,7 +15,7 @@ USELIB_RPI = USE_WIRINGPI_LIB
 LIB_RPI = -lwiringPi -lm 
 DEBUG_RPI = -D $(USELIB_RPI) -D RPI
 
-RPI:RPI_epd 
+RPI:RPI_DEV RPI_epd 
 
 TARGET = epd
 CC = gcc
@@ -34,3 +34,6 @@ ${DIR_BIN}/%.o:$(DIR_EPD)/%.c
     
 ${DIR_BIN}/%.o:$(DIR_GUI)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
+
+RPI_DEV:
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
