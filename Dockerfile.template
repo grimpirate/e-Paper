@@ -4,15 +4,22 @@
 # https://docs.docker.com/engine/reference/builder/
 # https://www.balena.io/docs/reference/base-images/base-images/
 # https://www.balena.io/docs/learn/develop/dockerfile/
-# raspberry-pi-debian-openjdk:latest-buster-build
-FROM balenalib/%%BALENA_MACHINE_NAME%%-openjdk:latest-build
+# balenalib/raspberry-pi-debian-openjdk:latest-buster-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%:build
 
-RUN install_packages wiringpi
+RUN apt-get update
+
+RUN install_packages php unzip wiringpi
 
 RUN git clone https://github.com/grimpirate/e-Paper
 
 WORKDIR e-Paper
 
-RUN mkdir bin && make
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip; \
+unzip ngrok-stable-linux-arm.zip; \
+rm ngrok-stable-linux-arm.zip;
 
-ENTRYPOINT /usr/bin/tvservice -o && sleep infinity
+RUN mkdir bin; \
+make;
+
+ENTRYPOINT /usr/bin/tvservice -o && cd php && ./php -S localhost:80 index.php 
