@@ -102,7 +102,7 @@ extern PAINT Paint;
 
 
 //init and Clear
-void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD Color);
+void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Color);
 void Paint_SelectImage(UBYTE *image);
 void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color);
 
