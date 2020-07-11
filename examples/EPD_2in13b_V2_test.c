@@ -65,7 +65,7 @@ int EPD_2in13b_V2_test(void)
     Paint_SelectImage(RYImage);
     Paint_Clear(WHITE);
     for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
-			for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH/2; X++ ) {//8 pixel =  1 byte
+			for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
 				Paint_SetPixel(X, Y, BLACK);
 			}
 		}
