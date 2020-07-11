@@ -124,9 +124,9 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         Debug("Exceeding display boundaries\r\n");
         return;
     }      
-    UWORD X, Y;
-    X = Xpoint;
-    Y = Ypoint;  
+
+    UWORD X = Ypoint;
+    UWORD Y = Paint.HeightMemory - Xpoint - 1;
 
     if(X > Paint.WidthMemory || Y > Paint.HeightMemory){
         Debug("Exceeding display boundaries\r\n");
