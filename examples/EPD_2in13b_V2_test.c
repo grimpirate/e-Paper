@@ -60,8 +60,10 @@ int EPD_2in13b_V2_test(void)
     // show bmp
     printf("show red bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
+    Paint_Clear(WHITE);
     Paint_SetPixel(0, 0, BLACK);
     Paint_SelectImage(RYImage);
+    Paint_Clear(WHITE);
     Paint_SetPixel(1, 1, BLACK);
     EPD_2IN13B_V2_Display(BlackImage, RYImage);
     // DEV_Delay_ms(2000);
