@@ -97,8 +97,8 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Color)
 //    printf("WidthByte = %d, HeightByte = %d\r\n", Paint.WidthByte, Paint.HeightByte);
 //    printf(" EPD_WIDTH / 8 = %d\r\n",  122 / 8);
     
-    Paint.Width = Width;
-    Paint.Height = Height;
+    Paint.Width = Height;
+    Paint.Height = Width;
 }
 
 /******************************************************************************
