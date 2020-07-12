@@ -93,7 +93,7 @@ function: Clear the color of the picture
 parameter:
     Color : Painted colors
 ******************************************************************************/
-void Paint_Clear(UByte *image, UWORD Color)
+void Paint_Clear(UBYTE *image, UWORD Color)
 {	
 	for (UWORD Y = 0; Y < 212; Y++) {
         for (UWORD X = 0; X < 13; X++ ) {//8 pixel =  1 byte
