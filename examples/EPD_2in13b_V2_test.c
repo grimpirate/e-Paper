@@ -44,7 +44,7 @@ int EPD_2in13b_V2_test(void)
 
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *BlackImage, *RYImage; // Red or Yellow
-    UWORD Imagesize = ((EPD_2IN13B_V2_WIDTH % 8 == 0)? (EPD_2IN13B_V2_WIDTH / 8 ): (EPD_2IN13B_V2_WIDTH / 8 + 1)) * EPD_2IN13B_V2_HEIGHT;
+    UWORD Imagesize = EPD_2IN13B_V2_WIDTH / 8 * EPD_2IN13B_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
@@ -53,22 +53,14 @@ int EPD_2in13b_V2_test(void)
         printf("Failed to apply for red memory...\r\n");
         return -1;
     }
-    printf("NewImage:BlackImage and RYImage\r\n");
-    Paint_NewImage(BlackImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, WHITE);
-    Paint_NewImage(RYImage, EPD_2IN13B_V2_WIDTH, EPD_2IN13B_V2_HEIGHT, WHITE);
 
     // show bmp
     printf("show red bmp------------------------\r\n");
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
-    Paint_SetPixel(0, 0, BLACK);
-    Paint_SelectImage(RYImage);
-    Paint_Clear(WHITE);
-    for (UWORD Y = 0; Y < EPD_2IN13B_V2_HEIGHT; Y++) {
-			for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
-				Paint_SetPixel(X, Y, BLACK);
-			}
-		}
+    Paint_Clear(BlackImage, WHITE);
+    Paint_Clear(RYImage, WHITE);
+	for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
+		Paint_SetPixel(X, 0, BLACK);
+	}
     EPD_2IN13B_V2_Display(BlackImage, RYImage);
     // DEV_Delay_ms(2000);
 
