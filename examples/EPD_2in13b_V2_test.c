@@ -49,15 +49,15 @@ int EPD_2in13b_V2_test(void)
         printf("Failed to apply for black memory...\r\n");
         return -1;
     }
+	Paint_Clear(BlackImage, WHITE);
     if((RYImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for red memory...\r\n");
         return -1;
     }
+	Paint_Clear(RYImage, WHITE);
 
     // show bmp
     printf("show red bmp------------------------\r\n");
-    Paint_Clear(BlackImage, WHITE);
-    Paint_Clear(RYImage, WHITE);
 	for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
 		Paint_SetPixel(RYImage, X, 0, BLACK);
 	}
