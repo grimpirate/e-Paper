@@ -74,43 +74,6 @@
 #include <string.h> //memset()
 #include <math.h>
 
-PAINT Paint;
-
-/******************************************************************************
-function: Create Image
-parameter:
-    image   :   Pointer to the image cache
-    width   :   The width of the picture
-    Height  :   The height of the picture
-    Color   :   Whether the picture is inverted
-******************************************************************************/
-void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Color)
-{
-    Paint.Image = NULL;
-    Paint.Image = image;
-
-    Paint.WidthMemory = Width;
-    Paint.HeightMemory = Height;
-    Paint.Color = Color;    
-    Paint.WidthByte = (Width % 8 == 0)? (Width / 8 ): (Width / 8 + 1);
-    Paint.HeightByte = Height;    
-//    printf("WidthByte = %d, HeightByte = %d\r\n", Paint.WidthByte, Paint.HeightByte);
-//    printf(" EPD_WIDTH / 8 = %d\r\n",  122 / 8);
-    
-    Paint.Width = Height;
-    Paint.Height = Width;
-}
-
-/******************************************************************************
-function: Select Image
-parameter:
-    image : Pointer to the image cache
-******************************************************************************/
-void Paint_SelectImage(UBYTE *image)
-{
-    Paint.Image = image;
-}
-
 /******************************************************************************
 function: Draw Pixels
 parameter:
@@ -118,27 +81,11 @@ parameter:
     Ypoint : At point Y
     Color  : Painted colors
 ******************************************************************************/
-void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
+void Paint_SetPixel(UBYTE *image, UWORD X, UWORD Y, UWORD Color)
 {
-    if(Xpoint > Paint.Width || Ypoint > Paint.Height){
-        Debug("Exceeding display boundaries\r\n");
-        return;
-    }      
-
-    UWORD X = Ypoint;
-    UWORD Y = Paint.HeightMemory - Xpoint - 1;
-
-    if(X > Paint.WidthMemory || Y > Paint.HeightMemory){
-        Debug("Exceeding display boundaries\r\n");
-        return;
-    }
-    
-    UDOUBLE Addr = X / 8 + Y * Paint.WidthByte;
-    UBYTE Rdata = Paint.Image[Addr];
-    if(Color == BLACK)
-        Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
-    else
-        Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
+	UDOUBLE Addr = X / 8 + Y * 13; // 13 is width in bytes of the screen or 104 / 8
+    	UBYTE Rdata = image[Addr];
+	image[Addr] = Color == BLACK ? Rdata & ~(0x80 >> (X % 8)) : Rdata | (0x80 >> (X % 8));
 }
 
 /******************************************************************************
@@ -146,12 +93,11 @@ function: Clear the color of the picture
 parameter:
     Color : Painted colors
 ******************************************************************************/
-void Paint_Clear(UWORD Color)
+void Paint_Clear(UByte *image, UWORD Color)
 {	
-	for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
-        for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
-            UDOUBLE Addr = X + Y*Paint.WidthByte;
-            Paint.Image[Addr] = Color;
+	for (UWORD Y = 0; Y < 212; Y++) {
+        for (UWORD X = 0; X < 13; X++ ) {//8 pixel =  1 byte
+            image[X + Y * 13] = Color;
         }
     }       
 }
