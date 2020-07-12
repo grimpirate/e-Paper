@@ -73,41 +73,15 @@
 #include "DEV_Config.h"
 
 /**
- * Image attributes
-**/
-typedef struct {
-    UBYTE *Image;
-    UWORD Width;
-    UWORD Height;
-    UWORD WidthMemory;
-    UWORD HeightMemory;
-    UWORD Color;
-    UWORD WidthByte;
-    UWORD HeightByte;
-} PAINT;
-extern PAINT Paint;
-
-/**
  * image color
 **/
 #define WHITE          0xFF
 #define BLACK          0x00
 #define RED            BLACK
 
-//4 Gray level
-#define  GRAY1 0x03 //Blackest
-#define  GRAY2 0x02
-#define  GRAY3 0x01 //gray
-#define  GRAY4 0x00 //white
-
-
 //init and Clear
-void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Color);
-void Paint_SelectImage(UBYTE *image);
-void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color);
-
-void Paint_Clear(UWORD Color);
-
+void Paint_SetPixel(UBYTE *image, UWORD Xpoint, UWORD Ypoint, UWORD Color);
+void Paint_Clear(UBYTE *image, UWORD Color);
 
 #endif
 
