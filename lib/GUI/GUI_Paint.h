@@ -80,7 +80,7 @@
 #define RED            BLACK
 
 //init and Clear
-void Paint_SetPixel(UBYTE *image, UWORD Xpoint, UWORD Ypoint, UWORD Color);
+void Paint_SetPixel(UBYTE *image, UWORD X, UWORD Y, UWORD Color);
 void Paint_Clear(UBYTE *image, UWORD Color);
 
 #endif
