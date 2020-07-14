@@ -29,6 +29,7 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_2in13b_V2.h"
+#include <stdio.h>
 
 int EPD_2in13b_V2_test(void)
 {
@@ -58,9 +59,25 @@ int EPD_2in13b_V2_test(void)
 
     // show bmp
     printf("show red bmp------------------------\r\n");
-	for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
+	FILE *fp;                     //Define a file pointer
+    if((fp = fopen("black", "rb")) == NULL) {
+        printf("Can't open file!\r\n");
+        return -1;
+    }
+
+    UBYTE Rdata;
+    for(UWORD i = 0; i < Imagesize; i++) {
+    	if(fread((char *)&Rdata, 1, 1, fp) != 1) {
+            printf("get bmpdata:\n");
+            break;
+        }
+        BlackImage[i] = Rdata;
+    }
+    fclose(fp);
+	
+	/*for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
 		Paint_SetPixel(RYImage, X, 0, BLACK);
-	}
+	}*/
     EPD_2IN13B_V2_Display(BlackImage, RYImage);
     // DEV_Delay_ms(2000);
 
