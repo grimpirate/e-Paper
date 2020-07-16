@@ -60,18 +60,34 @@ int EPD_2in13b_V2_test(void)
     // show bmp
     printf("show red bmp------------------------\r\n");
 	FILE *fp;                     //Define a file pointer
+	UBYTE Rdata;
+	
     if((fp = fopen("black", "rb")) == NULL) {
         printf("Can't open file!\r\n");
         return -1;
     }
 
-    UBYTE Rdata;
+    
     for(UWORD i = 0; i < Imagesize; i++) {
     	if(fread((char *)&Rdata, 1, 1, fp) != 1) {
             printf("get bmpdata:\n");
             break;
         }
         BlackImage[i] = Rdata;
+    }
+    fclose(fp);
+	
+    if((fp = fopen("red", "rb")) == NULL) {
+        printf("Can't open file!\r\n");
+        return -1;
+    }
+
+    for(UWORD i = 0; i < Imagesize; i++) {
+    	if(fread((char *)&Rdata, 1, 1, fp) != 1) {
+            printf("get bmpdata:\n");
+            break;
+        }
+        RYImage[i] = Rdata;
     }
     fclose(fp);
 	
