@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-Hello World!
+<a href="/">Refresh</a>
 </body>
 </html>
