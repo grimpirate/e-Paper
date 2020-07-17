@@ -60,7 +60,7 @@ int EPD_2in13b_V2_test(void)
     // show bmp
     printf("show red bmp------------------------\r\n");
 	FILE *fp;                     //Define a file pointer
-	UBYTE Rdata;
+	//UBYTE Rdata;
 	
     if((fp = fopen("black", "rb")) == NULL) {
         printf("Can't open file!\r\n");
@@ -68,13 +68,13 @@ int EPD_2in13b_V2_test(void)
     }
 
     
-    for(UWORD i = 0; i < Imagesize; i++) {
-    	if(fread((char *)&Rdata, 1, 1, fp) != 1) {
+    //for(UWORD i = 0; i < Imagesize; i++) {
+    	if(fread(BlackImage, 1, Imagesize, fp) != Imagesize) {
             printf("get bmpdata:\n");
-            break;
+            //break;
         }
-        BlackImage[i] = Rdata;
-    }
+     //   BlackImage[i] = Rdata;
+    //}
     fclose(fp);
 	
     if((fp = fopen("red", "rb")) == NULL) {
@@ -82,13 +82,13 @@ int EPD_2in13b_V2_test(void)
         return -1;
     }
 
-    for(UWORD i = 0; i < Imagesize; i++) {
-    	if(fread((char *)&Rdata, 1, 1, fp) != 1) {
+    //for(UWORD i = 0; i < Imagesize; i++) {
+    	if(fread(RYImage, 1, Imagesize, fp) != Imagesize) {
             printf("get bmpdata:\n");
-            break;
+            //break;
         }
-        RYImage[i] = Rdata;
-    }
+      //  RYImage[i] = Rdata;
+    //}
     fclose(fp);
 	
 	/*for (UWORD X = 0; X < EPD_2IN13B_V2_WIDTH; X++ ) {//8 pixel =  1 byte
