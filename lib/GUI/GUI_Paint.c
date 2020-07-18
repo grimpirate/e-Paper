@@ -68,11 +68,11 @@
 ******************************************************************************/
 #include "GUI_Paint.h"
 #include "DEV_Config.h"
-/*#include "Debug.h"
+#include "Debug.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h> //memset()
-#include <math.h>*/
+#include <math.h>
 
 /******************************************************************************
 function: Draw Pixels
