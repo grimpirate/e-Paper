@@ -15,7 +15,7 @@ RUN git clone https://github.com/grimpirate/e-Paper
 
 WORKDIR e-Paper
 
-RUN wget -quiet https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip; \
+RUN wget --quiet https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip; \
 unzip ngrok-stable-linux-arm.zip; \
 rm ngrok-stable-linux-arm.zip;
 
