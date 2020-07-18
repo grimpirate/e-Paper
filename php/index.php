@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 use Mike42\GfxPhp\Image;
 
-error_reporting(E_NONE);
+error_reporting(0);
 
 if(
 	!password_verify($_SERVER['PHP_AUTH_USER'], getenv('E_PAPER_USER_HASH')) ||
