@@ -23,7 +23,7 @@ Flight::route('POST /', function() {
 		unlink('black');
 		unlink('red');
 	}
-	Flight::render('get');
+	Flight::render('post');
 	/*$foo = array_map(function($ele){
 		return pack('C',$ele);
 	}, array_merge(array_fill(0, 104/8*212/2, 0xff),array_fill(0, 104/8*212/2, 0x00)));
