@@ -11,6 +11,8 @@ RUN install_packages php unzip wiringpi
 
 # RUN sed -i 's/;extension=gd2/extension=gd2/g' /etc/php/7.3/apache2/php.ini
 
+WORKDIR /home
+
 RUN git clone https://github.com/grimpirate/e-Paper
 
 WORKDIR e-Paper
