@@ -3,7 +3,16 @@ require 'vendor/autoload.php';
 
 use Mike42\GfxPhp\Image;
 
-error_reporting(E_ALL);
+error_reporting(E_NONE);
+
+if(
+	!password_verify($_SERVER['PHP_AUTH_USER'], getenv('E_PAPER_USER_HASH')) ||
+	!password_verify($_SERVER['PHP_AUTH_PW'], getenv('E_PAPER_PASSWORD_HASH'))
+) {
+	header('WWW-Authenticate: Basic realm="E-Paper"');
+	header('HTTP/1.0 401 Unauthorized');
+	die();
+}
 
 Flight::route('POST /', function() {
 	if(!is_null(Flight::request()->files->upload)) {
