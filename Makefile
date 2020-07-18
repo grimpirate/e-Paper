@@ -1,10 +1,9 @@
 DIR_Config   = ./lib/Config
 DIR_EPD      = ./lib/e-Paper
-DIR_GUI      = ./lib/GUI
 DIR_Examples = ./examples
 DIR_BIN      = ./bin
 
-OBJ_C = $(wildcard ${DIR_EPD}/*.c ${DIR_GUI}/*.c ${DIR_Examples}/*.c )
+OBJ_C = $(wildcard ${DIR_EPD}/*.c ${DIR_Examples}/*.c )
 OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
 RPI_DEV_C = $(wildcard $(DIR_BIN)/DEV_Config.o )
 
@@ -27,7 +26,7 @@ RPI_epd:${OBJ_O}
 	$(CC) $(CFLAGS) -D RPI $(OBJ_O) $(RPI_DEV_C) -o $(TARGET) $(LIB_RPI) $(DEBUG)
     
 ${DIR_BIN}/%.o:$(DIR_Examples)/%.c
-	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_GUI) -I $(DIR_EPD) $(DEBUG)
+	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_EPD) $(DEBUG)
     
 ${DIR_BIN}/%.o:$(DIR_EPD)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
