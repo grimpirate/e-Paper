@@ -21,6 +21,7 @@ WORKDIR e-Paper
 
 RUN mkdir bin; \
 make; \
-rm -rf bin/ .git/ examples/ lib/ Dockerfile.template Makefile;
+rm -rf bin/ .git/ examples/ lib/ Dockerfile.template Makefile; \
+chmod 0755 ngrok;
 
 ENTRYPOINT /usr/bin/tvservice -o && cd php && php -S localhost:80 index.php 
